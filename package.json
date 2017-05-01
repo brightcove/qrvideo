@@ -1,0 +1,23 @@
+{
+  "name": "qrcodes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "browserify app/index.js -o app/bundle.js",
+    "watch": "watchify app/index.js -o app/bundle.js -v",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "kxing": "^1.1.2",
+    "qr-image": "^3.1.0",
+    "qrcode": "^0.8.1"
+  },
+  "devDependencies": {
+    "browserify": "^14.3.0",
+    "watchify": "^3.9.0"
+  }
+}
