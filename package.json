@@ -14,9 +14,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "fs-extra": "^3.0.0",
     "kxing": "^1.1.2",
     "qr-image": "^3.1.0",
-    "qrstuv": "^0.2.3"
+    "qrstuv": "^0.2.3",
+    "stream-to-promise": "^2.2.0"
   },
   "devDependencies": {
     "browserify": "^14.3.0",
