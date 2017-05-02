@@ -8,7 +8,7 @@
     "watch": "watchify app/index.js -o app/bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "node bin/index.js",
+  "bin": "bin/cli.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
