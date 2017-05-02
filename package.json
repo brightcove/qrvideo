@@ -1,6 +1,6 @@
 {
-  "name": "qrcodes",
-  "version": "1.0.0",
+  "name": "qrvideo",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,6 +8,7 @@
     "watch": "watchify app/index.js -o app/bundle.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": "node bin/index.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
