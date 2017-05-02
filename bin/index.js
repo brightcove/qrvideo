@@ -9,9 +9,12 @@ var osTmp = os.tmpdir();
 var qrsDir = path.join(osTmp, 'qrs');
 
 function generateQrs(options) {
-  var ec_level = options.ec_level || 'Q';
-  var size = options.size || 6;
-  var num = options.length || 100;
+  var ec_level = options.ec_level;
+  var size = options.size;
+  var len = options.length;
+  var qrsPerFrame = options.qrsPerFramePeriod;
+
+  var num = len * qrsPerFrame;
 
   function generateQr(i) {
     return qr.image(i, {
@@ -35,14 +38,18 @@ function cleanupQrs() {
   return fs.remove(qrsDir);
 }
 
+function moveQrs() {
+  return fs.move(qrsDir, process.cwd());
+}
+
 function generateVideo(options) {
-  var framerate = options.framerate || 30;
-  var qrsPerFramePeriod = options.qrsPerFramePeriod || 1;
-  var name = options.name || out.mp4;
+  var framerate = options.framerate;
+  var qrsPerFramePeriod = options.qrsPerFramePeriod;
+  var name = options.name;
 
   var settings = [
     '-framerate', qrsPerFramePeriod,
-    '-i', 'qrs/img%d.png',
+    '-i', path.join(qrsDir, 'img%d.png'),
     '-c:v', 'libx264',
     '-r', framerate,
     '-pix_fmt', 'yuv420p',
@@ -64,5 +71,6 @@ function generateVideo(options) {
 module.exports = {
   generateQrs: generateQrs,
   generateVideo: generateVideo,
-  cleanupQrs: cleanupQrs
+  cleanupQrs: cleanupQrs,
+  moveQrs: moveQrs
 };

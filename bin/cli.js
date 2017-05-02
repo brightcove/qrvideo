@@ -12,17 +12,28 @@ var args = require('minimist')(process.argv.slice(2), {
     f: 'framerate',
     q: 'qrs-per-period',
     s: 'size'
+  },
+  default: {
+    length: 30,
+    q: 1,
+    size: 6,
+    e: 'Q',
+    f: 30,
+    name: 'out.mp4'
   }
 });
 
 console.log(args);
 
-qrvideo.generateQrs({
-  framerate: args.framerate,
-  qrsPerFramePeriod: args.q,
-  length: args.length,
-  size: args.size,
-  ec_level: args.e
+qrvideo.cleanupQrs()
+.then(function() {
+  return qrvideo.generateQrs({
+    framerate: args.framerate,
+    qrsPerFramePeriod: args.q,
+    length: args.length,
+    size: args.size,
+    ec_level: args.e
+  })
 })
 .then(function() {
   return qrvideo.generateVideo({
@@ -32,7 +43,13 @@ qrvideo.generateQrs({
     length: args.length
   });
 })
-.then(qrvideo.cleanupQrs, qrvideo.cleanupQrs)
+.then(function() {
+  if (!args.k) {
+    return qrvideo.cleanupQrs();
+  }
+
+  return qrvideo.moveQrs();
+}, qrvideo.cleanupQrs)
 .then(function() {
   console.log('done!');
 });
