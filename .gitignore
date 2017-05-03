@@ -1,4 +1,4 @@
 node_modules/
 qrs*
 *.mp4
-app/bundle.js
+*/bundle.js
