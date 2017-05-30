@@ -7,6 +7,8 @@ var streamToPromise = require('stream-to-promise');
 var os = require('os');
 var osTmp = os.tmpdir();
 var qrsDir = path.join(osTmp, 'qrs');
+var handlebars = require('handlebars');
+var timecodes = require('node-timecodes');
 
 function getDir(temp) {
   return temp ? qrsDir : path.join(process.cwd(), 'qrs');
@@ -18,11 +20,22 @@ function generateQrs(options) {
   var len = options.length;
   var qrsPerFrame = options.qrsPerFramePeriod;
   var temp = options.temp;
+  var json = function(opts) { return opts.frame; };
+
+  if (options.json) {
+    json = handlebars.compile(fs.readFileSync(path.join(process.cwd(), options.json), 'utf8'));
+  }
 
   var num = len * qrsPerFrame;
 
   function generateQr(i) {
-    return qr.image(i, {
+    var j = json({
+      frame: i,
+      timestamp: timecodes.fromSeconds(i, {
+        frameRate: 30
+      })
+    });
+    return qr.image(j, {
       ec_level: ec_level,
       size: size
     }).pipe(fs.createWriteStream(path.join(getDir(temp), 'img' + i + '.png')));
