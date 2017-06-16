@@ -46,15 +46,18 @@ function generateVideo(options) {
   var framerate = options.framerate;
   var qrsPerFramePeriod = options.qrsPerFramePeriod;
   var name = options.name;
+  var audio = options.audio;
 
   var settings = [
     '-framerate', qrsPerFramePeriod,
     '-i', path.join(qrsDir, 'img%d.png'),
-    '-c:v', 'libx264',
+    '-i', audio,
+    '-vcodec', 'libx264',
     '-r', framerate,
     '-pix_fmt', 'yuv420p',
-    name
+    name + '.mp4'
   ];
+  console.log(settings);
   var ffmpeg = spawn('ffmpeg', settings, {
     stdio: 'inherit'
   });
