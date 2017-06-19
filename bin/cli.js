@@ -15,6 +15,8 @@ var args = require('minimist')(process.argv.slice(2), {
     t: 'temp',
     v: 'video',
     j: 'json'
+    a: 'audio',
+    ext: 'extension'
   },
   default: {
     length: 30,
@@ -22,9 +24,11 @@ var args = require('minimist')(process.argv.slice(2), {
     size: 6,
     e: 'Q',
     f: 30,
-    name: 'out.mp4',
+    name: 'output',
+    extension: 'mp4',
     temp: true,
-    video: true
+    video: true,
+    audio: './default_silent_audio_360s.mp3'
   }
 });
 
@@ -47,7 +51,9 @@ qrvideo.cleanupQrs()
       name: args.name,
       framerate: args.framerate,
       qrsPerFramePeriod: args.q,
-      length: args.length
+      length: args.length,
+      audio: args.audio,
+      extension: args.extension
     });
   }
 })
