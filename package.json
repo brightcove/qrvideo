@@ -20,8 +20,10 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "fs-extra": "^3.0.0",
+    "handlebars": "^4.0.10",
     "kxing": "^1.1.2",
     "minimist": "^1.2.0",
+    "node-timecodes": "^2.4.1",
     "qr-image": "^3.1.0",
     "qrstuv": "^0.2.3",
     "stream-to-promise": "^2.2.0"

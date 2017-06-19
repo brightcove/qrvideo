@@ -14,6 +14,7 @@ var args = require('minimist')(process.argv.slice(2), {
     s: 'size',
     t: 'temp',
     v: 'video',
+    j: 'json'
     a: 'audio',
     ext: 'extension'
   },
@@ -34,6 +35,7 @@ var args = require('minimist')(process.argv.slice(2), {
 qrvideo.cleanupQrs()
 .then(function() {
   return qrvideo.generateQrs({
+    json: args.json,
     temp: args.temp,
     framerate: args.framerate,
     qrsPerFramePeriod: args.q,
