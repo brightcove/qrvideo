@@ -14,7 +14,7 @@ var args = require('minimist')(process.argv.slice(2), {
     s: 'size',
     t: 'temp',
     v: 'video',
-    j: 'json'
+    j: 'json',
     a: 'audio',
     ext: 'extension'
   },
@@ -27,8 +27,7 @@ var args = require('minimist')(process.argv.slice(2), {
     name: 'output',
     extension: 'mp4',
     temp: true,
-    video: true,
-    audio: './default_silent_audio_360s.mp3'
+    video: true
   }
 });
 

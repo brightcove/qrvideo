@@ -16,6 +16,9 @@
   },
   "keywords": [],
   "author": "Gary Katsevman <git@gkatsev.com>",
+  "contributors": [
+    "Jayson Smith <jsmith@brightcove.com>"
+  ],
   "license": "Apache-2.0",
   "dependencies": {
     "bluebird": "^3.5.0",
