@@ -68,23 +68,20 @@ function generateVideo(options) {
   var audio = options.audio;
   var ext = options.extension;
   
-  var settings = [
+let audioOpt = []
+if (audio) {
+  audioOpt.push('-i', audio === 'default' ? './default_silent_audio_360s.mp3' : audio)
+}
+var settings = [
     '-framerate', qrsPerFramePeriod,
     '-i', path.join(getDir(options.temp), 'img%d.png'),
+    ...audioOpt,
     '-c:v', 'libx264',
     '-pix_fmt', 'yuv420p',
     '-r', framerate,
     '-shortest', '-y',
     name + '.' + ext
   ];
-
-  if (audio == 'default') {
-    settings.splice(4, 0, '-i');
-    settings.splice(5, 0, './default_silent_audio_360s.mp3');
-  } else if (audio) {
-    settings.splice(4, 0, '-i');
-    settings.splice(5, 0, audio);
-  }
 
   console.log(settings);
   var ffmpeg = spawn('ffmpeg', settings, {
