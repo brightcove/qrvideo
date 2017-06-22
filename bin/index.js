@@ -70,7 +70,7 @@ function generateVideo(options) {
 
   let audioOpt = []
   if (audio) {
-    audioOpt.push('-i', audio === 'default' ? './default_silent_audio_360s.mp3' : audio)
+    audioOpt.push('-i', audio === 'default' ? './default_silent_audio_360s.mp3' : audio);
   }
   var settings = [
     '-framerate', qrsPerFramePeriod,
