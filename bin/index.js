@@ -20,7 +20,7 @@ function generateQrs(options) {
   var len = options.length;
   var qrsPerFrame = options.qrsPerFramePeriod;
   var temp = options.temp;
-  var json = function(opts) { return opts.frame; };
+  var json = function (opts) { return opts.frame; };
 
   if (options.json) {
     json = handlebars.compile(fs.readFileSync(path.join(process.cwd(), options.json), 'utf8'));
@@ -41,7 +41,7 @@ function generateQrs(options) {
     }).pipe(fs.createWriteStream(path.join(getDir(temp), 'img' + i + '.png')));
   }
 
-  return fs.ensureDir(qrsDir).then(function() {
+  return fs.ensureDir(qrsDir).then(function () {
     var promises = [];
 
     for (var i = 0; i < num; i++) {
@@ -67,12 +67,12 @@ function generateVideo(options) {
   var name = options.name;
   var audio = options.audio;
   var ext = options.extension;
-  
-let audioOpt = []
-if (audio) {
-  audioOpt.push('-i', audio === 'default' ? './default_silent_audio_360s.mp3' : audio)
-}
-var settings = [
+
+  let audioOpt = []
+  if (audio) {
+    audioOpt.push('-i', audio === 'default' ? './default_silent_audio_360s.mp3' : audio)
+  }
+  var settings = [
     '-framerate', qrsPerFramePeriod,
     '-i', path.join(getDir(options.temp), 'img%d.png'),
     ...audioOpt,
@@ -88,10 +88,10 @@ var settings = [
     stdio: 'inherit'
   });
 
-  return new Promise(function(resolve, reject) {
+  return new Promise(function (resolve, reject) {
     ffmpeg.on('error', reject);
     ffmpeg.on('close', resolve);
-    ffmpeg.on('exit', function() {
+    ffmpeg.on('exit', function () {
       ffmpeg.kill();
     });
   });
