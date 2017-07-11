@@ -41,15 +41,15 @@ function generateQrs(options) {
     }).pipe(fs.createWriteStream(path.join(getDir(temp), 'img' + i + '.png')));
   }
 
-  return fs.ensureDir(qrsDir).then(function () {
-    var promises = [];
+    return fs.ensureDir(qrsDir).then(function () {
+      var frames = [];
 
-    for (var i = 0; i < num; i++) {
-      var promise = streamToPromise(generateQr(i));
-      promises.push(promise);
-    }
-    return Promise.all(promises);
-  });
+
+      for (var i = 0; i < num; i++) {
+        frames.push(i);
+      }
+      return Promise.mapSeries(frames, i => streamToPromise(generateQr(i)));
+    });
 };
 
 function cleanupQrs() {
